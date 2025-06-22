@@ -1,8 +1,8 @@
 from fastapi import FastAPI
+from src.routes import task, user
 
-app = FastAPI(title="Task Manah=ger API")
+app = FastAPI(title="Task Manager API")
 
-
-@app.get("/")
-async def read_root():
-  return {"message": "Hello, World!"}
+# Include routers
+app.include_router(user.router, prefix="/users", tags=["users"])
+app.include_router(task.router, prefix="/tasks", tags=["tasks"])
